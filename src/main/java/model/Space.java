@@ -8,7 +8,7 @@ public class Space {
     private final boolean fixed;
 
 
-    public space(int expected, boolean fixed) {
+    public Space(int expected, boolean fixed) {
         this.expected = expected;
         this.fixed = fixed;
         if (fixed){
@@ -25,7 +25,7 @@ public class Space {
         if (fixed) return;
         this.actual = actual;
     }
-    public void cleanerspacer () {
+    public void clearSpace(){
         setActual(null);
 
     }
