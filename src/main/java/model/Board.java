@@ -6,7 +6,7 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static model.GameStarEnum.*;
+import static model.GameStatusEnum.*;
 
 
 public class Board {
@@ -23,7 +23,7 @@ public class Board {
     }
 
 
-    public GameStarEnum getStatus() {
+    public GameStatusEnum getStatus() {
         if (spaces.stream().flatMap(Collection::stream).noneMatch(s -> !s.isFixed() && nonNull(s.getActual()))){
           return  NOW_STARTED;
 

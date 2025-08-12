@@ -16,18 +16,6 @@ import static java.util.stream.Collectors.toMap;
 public class Main {
 
 private final static Scanner scanner = new Scanner(System.in);
-    private static final String BOARD_TEMPLATE =
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "------+-------+------\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "------+-------+------\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s\n" +
-            "%s %s %s | %s %s %s | %s %s %s";
 
     private static Board board;
 
@@ -67,7 +55,7 @@ public static void main(String[] args) {
 
 }
 
-    private static void startGame(Map<String, String> positions) {
+    private static void startGame(final Map<String, String> positions) {
         if (nonNull(board)) {
             System.out.println("O jogo já foi iniciado");
             return;
@@ -142,6 +130,15 @@ public static void main(String[] args) {
             System.out.println("O jogo ainda não foi iniciado");
             return;
         }
+        System.out.printf("O jogo atualmente se encontra %s \n" , board.getStatus().getLabel());
+
+
+
+        if(board.hasErrors()){
+            System.out.println("O jogo contém erros");
+        } else {
+            System.out.println("O jogo não contém erros");
+        }
     }
 
     private static void clearGame() {
@@ -151,6 +148,17 @@ public static void main(String[] args) {
         return;
 
 }
+
+        System.out.println("Tem certeza que deseja limpar seu jogo e perder todo seu progresso?");
+        var confirm = scanner.next();
+        while (!confirm.equalsIgnoreCase( "sim") || !confirm.equalsIgnoreCase( "não")){
+            System.out.println("Informe 'sim' ou 'não'");
+            confirm = scanner.next();
+        }
+
+        if(confirm.equalsIgnoreCase( "sim")){
+            board.reset();
+        }
     }
 
     private static void finishGame() {
@@ -158,6 +166,16 @@ public static void main(String[] args) {
         if (isNull(board)) {
             System.out.println("O jogo ainda não foi iniciado");
             return;
+        }
+
+        if (board.gameIsFinished()){
+            System.out.println("Parabéns você concluiu o jogo");
+            showCurrentGame();
+            board = null;
+        } else if (board.hasErrors()) {
+            System.out.println("Seu jogo conté, erros, verifique seu board e ajuste-o");
+        } else {
+            System.out.println("Você ainda precisa preenhcer algum espaço1");
         }
     }
 
