@@ -1,9 +1,10 @@
-package model;
+package br.com.dio.model;
 
 public enum GameStatusEnum {
-    NOW_STARTED("Não iniciado"),
-    INCOMPLETE("Não completo"),
-    COMPLETE("Completo");
+
+    NON_STARTED("não iniciado"),
+    INCOMPLETE("incompleto"),
+    COMPLETE("completo");
 
     private String label;
 
@@ -14,4 +15,5 @@ public enum GameStatusEnum {
     public String getLabel() {
         return label;
     }
+
 }
